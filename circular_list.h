@@ -11,6 +11,6 @@ void shift_circ(node** pl, int num);
 
 bool is_empty(node* l);
 
-void print_circ(node* l);
+void print_circ(node* l, int loops);
 
 #endif

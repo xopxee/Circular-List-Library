@@ -65,9 +65,7 @@ bool is_empty(node* l){
 	return (l == NULL)? true : false;
 }
 
-
-//Add a parameter to determine how many times you wanna print.
-void print_circ(node* l){
+void print_circ(node* l, int loops){
 	
 	if(is_empty(l)){
 		printf("{ }\n");
@@ -77,8 +75,13 @@ void print_circ(node* l){
 	node* aux;
 	
 	printf("{ ");
-	for(aux = l; aux->next != l; aux = aux->next){
+	for(int i = 0; i < loops; i++){
+		
+		printf("| ");
+		for(aux = l; aux->next != l; aux = aux->next){
+			printf("%d ", aux->num);
+		}
 		printf("%d ", aux->num);
 	}
-	printf("%d }\n", aux->num);
+	printf("| }\n");
 }
