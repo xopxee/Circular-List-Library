@@ -1,16 +1,22 @@
 #ifndef CIRCULAR_LIST_H
 #define CIRCULAR_LIST_H
 
-#include "../Linked List Library/linked_list.h"	//Includes only node definition
+typedef struct cl_node cl_node;
 
-void init_circular_list(node** pl);
+struct cl_node{
+	int num;
+	cl_node* next;
+	
+};
 
-void delete_circular_list(node** pl);
+void init_circular_list(cl_node** pl);
 
-void shift_circ(node** pl, int num);
+void delete_circular_list(cl_node** pl);
 
-bool is_empty(node* l);
+void shift_circ(cl_node** pl, int num);
 
-void print_circ(node* l, int loops);
+bool is_empty_cl(cl_node* l);
+
+void print_circ(cl_node* l, int loops);
 
 #endif

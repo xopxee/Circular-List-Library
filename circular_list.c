@@ -1,78 +1,78 @@
 #include <stdio.h>
 #include "circular_list.h"
 
-void init_circular_list(node** pl){
+void init_circular_list(cl_node** pl){
 	*pl = NULL;
 }
 
-void delete_circular_list(node** pl){
+void delete_circular_list(cl_node** pl){
 	
-	if(is_empty(*pl))
+	if(is_empty_cl(*pl))
 		return;
 	
-	node* aux;
+	cl_node* aux;
 	
-	for(aux = *pl; aux->next != *pl; ){	//While the next node isn´t the head.
+	for(aux = *pl; aux->next != *pl; ){	//While the next cl_node isn´t the head.
 		
-		//Stores the address of the node to be deleted.
-		node* current_node = aux;
+		//Stores the address of the cl_node to be deleted.
+		cl_node* current_cl_node = aux;
 		
-		//aux points to the next node.
+		//aux points to the next cl_node.
 		aux = aux->next;
 		
-		free(current_node);
+		free(current_cl_node);
 	}
 	free(aux);
 	*pl = NULL;
 }
 
-void shift_circ(node** pl, int num){
+void shift_circ(cl_node** pl, int num){
 	
-	node* new_node = (node*)malloc(sizeof(node));
+	cl_node* new_cl_node = (cl_node*)malloc(sizeof(cl_node));
 	
-	if(new_node == NULL){
+	if(new_cl_node == NULL){
 		perror("Failed to allocate memory!");
 		exit(1);
 	}
 	
 	//Fills the data.
-	new_node->num = num;
+	new_cl_node->num = num;
 	
-	if(is_empty(*pl)){
+	if(is_empty_cl(*pl)){
 		
-		//new_node points to itself.
-		new_node->next = new_node;
+		//new_cl_node points to itself.
+		new_cl_node->next = new_cl_node;
 		
-		//Moves the head of the list to new_node.
-		*pl = new_node;
+		//Moves the head of the list to new_cl_node.
+		*pl = new_cl_node;
 	}
 	else{
-		node* aux;
+		cl_node* aux;
 		
-		//Finds the last node (where the loop restarts);
+		//Finds the last cl_node (where the loop restarts);
 		for(aux = *pl; aux->next != *pl; aux = aux->next);
 		
-		//new_node points to the head of the list.
-		new_node->next = *pl;
+		//new_cl_node points to the head of the list.
+		new_cl_node->next = *pl;
 		
-		//Moves the head of the list to new_node.
-		*pl = new_node;
-		aux->next = new_node;
+		//Moves the head of the list to new_cl_node.
+		*pl = new_cl_node;
+		aux->next = new_cl_node;
 	}
 }
 
-bool is_empty(node* l){
+bool is_empty_cl(cl_node* l){
 	return (l == NULL)? true : false;
 }
 
-void print_circ(node* l, int loops){
+void print_circ(cl_node* l, int loops){
 	
-	if(is_empty(l)){
+	if(is_empty_cl(l)){
 		printf("{ }\n");
 		return;
 	}
 	
-	node* aux;
+	cl_node* aux;
 	
 	printf("{ ");
 	for(int i = 0; i < loops; i++){
